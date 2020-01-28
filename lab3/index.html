@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+      </head>
+    <body>
+        <div id='main'>
+        <div id='directory'>
+            Artist Directory
+            <div id='search'>'</div>
+            <button id='add' onclick="openForm()">Add artist</button>
+       </div>
+       <div class="form-popup" id="myForm">
+        <form action="/action_page.php" class="form-container">
+          <h1>Login</h1>
+      
+          <label for="email"><b>Email</b></label>
+          <input type="text" placeholder="Enter Email" name="email" required>
+      
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" required>
+      
+          <button type="submit" class="btn">Login</button>
+          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+      </div>
+        <div class='artist'>
+            <div class='pic' id='one'></div><div class='text'>
+                Barot Bellingham <br> 
+                <span class='small'>Royal Academy of Painting and Sculpture</span>
+            </div>
+        </div>
+        </div>
+        </div>
+    </body>
+</html>
