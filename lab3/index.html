@@ -14,22 +14,14 @@
        </div>
 
        <div class="form-popup" id="myForm">
-        <form name="Form" class="form-container">
+        <form id="theForm" name="Form" class="form-container">
       
-          <input id="name" type="text" placeholder="Artist Name" required>
-          <input id="about" type="text" placeholder="About Artist"  required>
+          <input id="name" type="text" placeholder="Artist Name" maxlength="40" required>
+          <input id="about" type="text" placeholder="About Artist"  maxlength="40" required>
           <input id="url" type="text" placeholder="Image url"  required>
           <button type='button' class="btn" onclick="sendInfo()">Add</button>
         </form>
       </div>
-
-
-        <div class='artist'>
-            <div class='pic' id='one'></div><div class='text'>
-                Barot Bellingham <br> 
-                <span class='small'>Royal Academy of Painting and Sculpture</span>
-            </div>
-        </div>
         </div>
         </div>
     </body>

@@ -1,4 +1,5 @@
 function toggleOpen() {
+  document.getElementById("theForm").reset();
   var x = document.getElementById("myForm");
   if (x.style.display === "none") {
     x.style.display = "block";
@@ -12,7 +13,7 @@ function sendInfo() {
   var about = document.getElementById("about").value;
   var url = document.getElementById("url").value;
 
-  //if (name !== "" && about !== "" && url != ""){
+  if (name !== "" && about !== "" && url != ""){
 
   var div = document.createElement("div");
   var text = document.createElement("div");
@@ -42,6 +43,8 @@ function sendInfo() {
   remove.appendChild(document.createTextNode('Delete'));
   span.appendChild(document.createTextNode("\n" + about));
   document.getElementById("main").appendChild(div);
+
+  
   toggleOpen();
-  //}
+  }
 }
