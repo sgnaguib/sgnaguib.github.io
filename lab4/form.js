@@ -1,4 +1,5 @@
 var persons = JSON.parse(window.localStorage.getItem('artistList'));
+if (persons === null) {persons = [];};
 loadLocalStorage();
 
 const isEqual = (obj1, obj2) => {
@@ -34,27 +35,29 @@ function sendInfo() {
   var about = document.getElementById("about").value;
   var url = document.getElementById("url").value;
 
-  var person = {Name: name, About: about, URL: url}
+  var person = {Name: name, About: about, URL: url, Div: null};
 
   if (name !== "" && about !== "" && url != ""){
+  div = createDiv(person);
+  person.Div = div;
+  console.log(person.Div);
   saveLocalStorage(person);
-  createDiv(person);
   toggleOpen();
   }
 }
 
 function saveLocalStorage(person){
-
+  console.log(person.Div);
   window.persons.push(person);
   window.localStorage.setItem('artistList', JSON.stringify(persons));
-  console.log(window.localStorage.getItem('artistList'));
-  console.log("CHECK");
+  console.log(persons);
 }
 
 function removeDiv(div, artist){
   console.log(artist);
   persons.forEach(function(person, index, object){
     if(isEqual(person, artist)){
+      console.log("GOT YA!")
       object.splice(index, 1);
     }
   })
@@ -96,15 +99,36 @@ function createDiv(artist){
   remove.appendChild(document.createTextNode('Delete'));
   span.appendChild(document.createTextNode("\n" + about));
   document.getElementById("main").appendChild(div);
+  return div;
+  console.log(artist.Div);
 
 }
 
-
-
 function loadLocalStorage(){
-  artists = JSON.parse(window.localStorage.getItem('artistList'));
+  artists = persons;
   console.log(artists);
   artists.forEach(function(artist){
-    createDiv(artist);
+    div = createDiv(artist);
+    artist.Div = div;
   })
+}
+
+function search(){
+  input = document.getElementById("search").value.toLowerCase();
+  
+  if (input !== ""){
+  persons.forEach(function(person){
+    if(!person.Name.toLowerCase().includes(input)){
+      person.Div.style.display = "none";
+    }
+    else{
+      person.Div.style.display = "block";
+    }
+  })
+} else{
+  persons.forEach(function(person){
+      person.Div.style.display = "block";
+  })
+
+}
 }
