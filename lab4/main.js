@@ -40,24 +40,19 @@ function sendInfo() {
   if (name !== "" && about !== "" && url != ""){
   div = createDiv(person);
   person.Div = div;
-  console.log(person.Div);
   saveLocalStorage(person);
   toggleOpen();
   }
 }
 
 function saveLocalStorage(person){
-  console.log(person.Div);
   window.persons.push(person);
   window.localStorage.setItem('artistList', JSON.stringify(persons));
-  console.log(persons);
 }
 
 function removeDiv(div, artist){
-  console.log(artist);
   persons.forEach(function(person, index, object){
     if(isEqual(person, artist)){
-      console.log("GOT YA!")
       object.splice(index, 1);
     }
   })
@@ -100,13 +95,11 @@ function createDiv(artist){
   span.appendChild(document.createTextNode("\n" + about));
   document.getElementById("main").appendChild(div);
   return div;
-  console.log(artist.Div);
 
 }
 
 function loadLocalStorage(){
   artists = persons;
-  console.log(artists);
   artists.forEach(function(artist){
     div = createDiv(artist);
     artist.Div = div;
