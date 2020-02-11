@@ -1,0 +1,136 @@
+#directory {
+  height: 100px;
+  width: 450px;
+  margin: auto;
+  padding: 20px 30px;
+  font-family: Arial;
+  font-weight: normal;
+  font-size:20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+
+}
+
+#main{
+  margin: auto;
+  width: 550px;
+  padding: 10px;
+}
+
+#search{
+  width:300px;
+  height: 30px;
+  margin: auto 0px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+#add{
+  width:50px;
+  height: 30px;
+  margin-left:10px;
+  display: inline-block;
+}
+
+
+.artist {
+  width:350px;
+  height: 80px;
+  margin: auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  position: relative;
+  font-family: Arial;
+}
+
+.artist:hover {
+  background-color: rgba(150, 150, 141, 0.1);
+}
+
+.pic {
+  height: 60px;
+  width:60px;
+  border-radius:3px;
+  background-position: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 15px;
+}
+
+.text {
+
+  height: 60px;
+  width:225px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-40%);
+  margin-left: 90px;
+  font-family: Helvetica;
+  line-height: 1.5;
+
+}
+
+.small {
+  font-size: 12px;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  text-align:center;
+}
+
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  background-color: white;
+  text-align:center;
+  display: inline-block;
+  padding-bottom:0px;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 250px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin: auto 0px;
+  display: inline-block;
+  text-align:center;
+
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 100px;
+  height: 30px;
+  opacity: 0.8;
+}
+
+
+  .remove {
+      background-color:red;
+      color:white;
+      border-radius: 3px;
+  
+          height: 30px;
+          width:50px;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-40%);
+          margin-left: 280px;
+  }
