@@ -37,12 +37,19 @@ function sendInfo() {
 
   var person = {Name: name, About: about, URL: url, Div: null};
 
-  if (name !== "" && about !== "" && url != ""){
-  div = createDiv(person);
-  person.Div = div;
-  saveLocalStorage(person);
-  toggleOpen();
-  }
+  let response = await fetch('/', { method: 'POST', headers: {
+    'Content-Type': 'application/json' },
+    body: JSON.stringify(1234) })
+  
+  
+  console.log(response.body);
+
+  // if (name !== "" && about !== "" && url != ""){
+  // div = createDiv(person);
+  // person.Div = div;
+  // saveLocalStorage(person);
+  // toggleOpen();
+  // }
 }
 
 function saveLocalStorage(person){
@@ -125,3 +132,10 @@ function search(){
 
 }
 }
+
+let response = await fetch('/', { method: 'POST', headers: {
+  'Content-Type': 'application/json' },
+  body: JSON.stringify(1234) })
+
+
+console.log(response.body);
