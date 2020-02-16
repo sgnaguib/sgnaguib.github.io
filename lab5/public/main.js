@@ -1,141 +1,160 @@
-var persons = JSON.parse(window.localStorage.getItem('artistList'));
-if (persons === null) {persons = [];};
-loadLocalStorage();
+  var localArtists = []
 
-const isEqual = (obj1, obj2) => {
-  const obj1Keys = Object.keys(obj1);
-  const obj2Keys = Object.keys(obj2);
 
-  if (obj1Keys.length !== obj2Keys.length) {
-    return false;
-  }
+  const isEqual = (obj1, obj2) => {
+    const obj1Keys = Object.keys(obj1);
+    const obj2Keys = Object.keys(obj2);
 
-  for (let objKey of obj1Keys) {
-    if (obj1[objKey] !== obj2[objKey]) {
+    if (obj1Keys.length !== obj2Keys.length) {
       return false;
     }
+
+    for (let objKey of obj1Keys) {
+      if (obj1[objKey] !== obj2[objKey]) {
+        return false;
+      }
+    }
+
+    return true;
+  };
+
+
+  function toggleOpen() {
+    document.getElementById("theForm").reset();
+    var x = document.getElementById("myForm");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
   }
 
-  return true;
-};
 
+  async function sendInfo() {
+    var name = document.getElementById("name").value;
+    var about = document.getElementById("about").value;
+    var url = document.getElementById("url").value;
 
-function toggleOpen() {
-  document.getElementById("theForm").reset();
-  var x = document.getElementById("myForm");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
+    var person = {
+      Name: name,
+      About: about,
+      URL: url,
+      Div: null
+    };
+
+    if (name !== "" && about !== "" && url != "") {
+      console.log(JSON.stringify(person));
+
+      fetch('/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          }, // this line is important, if this content-type is not set it wont work
+          body: JSON.stringify(person)
+        }).then((response) => response.json())
+        .then(function (data) {
+          loadArtists(data);
+        })
+
+      toggleOpen();
+    }
   }
-}
 
-function sendInfo() {
-  var name = document.getElementById("name").value;
-  var about = document.getElementById("about").value;
-  var url = document.getElementById("url").value;
 
-  var person = {Name: name, About: about, URL: url, Div: null};
+  function createDiv(artist) {
 
-  let response = await fetch('/', { method: 'POST', headers: {
-    'Content-Type': 'application/json' },
-    body: JSON.stringify(1234) })
-  
-  
-  console.log(response.body);
+    name = artist.Name;
+    about = artist.About;
+    url = artist.URL;
 
-  // if (name !== "" && about !== "" && url != ""){
-  // div = createDiv(person);
-  // person.Div = div;
-  // saveLocalStorage(person);
-  // toggleOpen();
-  // }
-}
+    var div = document.createElement("div");
+    var text = document.createElement("div");
+    var span = document.createElement("span");
+    var mainspan = document.createElement("span");
+    var linebreak = document.createElement("br");
+    var picture = document.createElement("div");
+    var remove = document.createElement("button")
 
-function saveLocalStorage(person){
-  window.persons.push(person);
-  window.localStorage.setItem('artistList', JSON.stringify(persons));
-}
-
-function removeDiv(div, artist){
-  persons.forEach(function(person, index, object){
-    if(isEqual(person, artist)){
-      object.splice(index, 1);
+    picture.className = "pic";
+    picture.style.backgroundImage = "url(" + url + ")";
+    div.className = "artist";
+    text.className = "text";
+    span.className = "small";
+    remove.className = "remove";
+    remove.onclick = function () {
+      removeDiv(artist);
     }
-  })
-  window.localStorage.setItem('artistList', JSON.stringify(persons));
-  document.getElementById("main").removeChild(div);
-}
 
-function createDiv(artist){
+    text.appendChild(mainspan);
+    text.appendChild(linebreak);
+    text.appendChild(span);
 
-  name = artist.Name;
-  about = artist.About;
-  url = artist.URL;
+    div.appendChild(picture);
+    div.appendChild(text);
+    div.appendChild(remove);
 
-  var div = document.createElement("div");
-  var text = document.createElement("div");
-  var span = document.createElement("span");
-  var mainspan = document.createElement("span");
-  var linebreak = document.createElement("br");
-  var picture = document.createElement("div");
-  var remove = document.createElement("button")
+    mainspan.appendChild(document.createTextNode(name));
+    remove.appendChild(document.createTextNode('Delete'));
+    span.appendChild(document.createTextNode("\n" + about));
+    document.getElementById("main").appendChild(div);
+    return div;
 
-  picture.className = "pic";
-  picture.style.backgroundImage = "url(" + url + ")";
-  div.className = "artist";
-  text.className = "text";
-  span.className = "small";
-  remove.className = "remove";
-  remove.onclick = function() {removeDiv(div, artist);}
+  }
 
-  text.appendChild(mainspan);
-  text.appendChild(linebreak);
-  text.appendChild(span);
+  function loadArtists(artists) {
 
-  div.appendChild(picture);
-  div.appendChild(text);
-  div.appendChild(remove);
-
-  mainspan.appendChild(document.createTextNode(name));
-  remove.appendChild(document.createTextNode('Delete'));
-  span.appendChild(document.createTextNode("\n" + about));
-  document.getElementById("main").appendChild(div);
-  return div;
-
-}
-
-function loadLocalStorage(){
-  artists = persons;
-  artists.forEach(function(artist){
-    div = createDiv(artist);
-    artist.Div = div;
-  })
-}
-
-function search(){
-  input = document.getElementById("search").value.toLowerCase();
+    //first remove previous artists
+    localArtists.forEach(function (artist) {
+      document.getElementById("main").removeChild(artist.Div);
+    })
   
-  if (input !== ""){
-  persons.forEach(function(person){
-    if(!person.Name.toLowerCase().includes(input)){
-      person.Div.style.display = "none";
+    //reset localArtists
+    localArtists = [];
+
+    //then load updated artist list
+    artists.forEach(function (artist) {
+      div = createDiv(artist);
+      artist.Div = div;
+      localArtists.push(artist);
+    })
+  }
+
+  async function removeDiv(artist) {
+    localArtists.forEach(function (person, index, object) {
+      if (isEqual(person, artist)) {
+        object.splice(index, 1);
+      }
+    })
+
+    fetch('/remove', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }, // this line is important, if this content-type is not set it wont work
+      body: JSON.stringify(artist)
+    }).then((response) => response)
+    .then(function (data) {
+      console.log(data);
+    })
+
+    document.getElementById("main").removeChild(artist.Div);
+  }
+
+  function search() {
+    input = document.getElementById("search").value.toLowerCase();
+
+    if (input !== "") {
+      artists.forEach(function (person) {
+        if (!person.Name.toLowerCase().includes(input)) {
+          person.Div.style.display = "none";
+        } else {
+          person.Div.style.display = "block";
+        }
+      })
+    } else {
+      artists.forEach(function (person) {
+        person.Div.style.display = "block";
+      })
+
     }
-    else{
-      person.Div.style.display = "block";
-    }
-  })
-} else{
-  persons.forEach(function(person){
-      person.Div.style.display = "block";
-  })
-
-}
-}
-
-let response = await fetch('/', { method: 'POST', headers: {
-  'Content-Type': 'application/json' },
-  body: JSON.stringify(1234) })
-
-
-console.log(response.body);
+  }

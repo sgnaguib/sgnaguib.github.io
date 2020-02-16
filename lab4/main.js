@@ -47,6 +47,8 @@ function sendInfo() {
 
 function saveLocalStorage(person){
   window.persons.push(person);
+  console.log(person)
+  console.log(JSON.stringify(person))
   window.localStorage.setItem('artistList', JSON.stringify(persons));
 }
 
