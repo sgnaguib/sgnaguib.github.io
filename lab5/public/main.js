@@ -1,4 +1,5 @@
   var localArtists = []
+  getArtists();
 
 
   const isEqual = (obj1, obj2) => {
@@ -27,6 +28,18 @@
     } else {
       x.style.display = "none";
     }
+  }
+
+  async function getArtists() {
+    fetch('/getArtists', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => response.json())
+    .then(function (data) {
+      loadArtists(data);
+    })
   }
 
 
@@ -140,21 +153,22 @@
     document.getElementById("main").removeChild(artist.Div);
   }
 
-  function search() {
-    input = document.getElementById("search").value.toLowerCase();
+  async function search() {
+    input = document.getElementById("search").value;
 
-    if (input !== "") {
-      artists.forEach(function (person) {
-        if (!person.Name.toLowerCase().includes(input)) {
-          person.Div.style.display = "none";
-        } else {
-          person.Div.style.display = "block";
-        }
-      })
-    } else {
-      artists.forEach(function (person) {
-        person.Div.style.display = "block";
-      })
-
-    }
+    if (input !== ""){
+    fetch('/search', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'text/plain'
+      }, 
+      body: input
+    }).then((response) => response.json())
+    .then(function (data) {
+      loadArtists(data);
+    })
+  }
+  else{
+    getArtists();
+  }
   }
