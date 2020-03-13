@@ -4,38 +4,33 @@ let bodyParser = require('body-parser');
 
 let app = express();
 
+const expressHbs = require('express-handlebars');
+app.engine(
+    'hbs',
+    expressHbs({
+      layoutsDir: 'views/layouts/',
+      defaultLayout: 'main-layout',
+      extname: 'hbs'
+    })
+  );
+  app.set('view engine', 'hbs');
+  app.set('views', 'views');
+
 
 app.use(express.static(path.join(__dirname,'public')));
 app.use(bodyParser.json());
-app.use(bodyParser.text());
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false })) // middleware
 
 app.get('/', (req,res) => {
-    res.sendFile(path.join(__dirname, 'views', 'index.html'))
+    res.render('directory', { pageTitle: 'People App'});
 
 })
 
 let playerRoutes = require('./routes/dataRoutes');
 
 app.use(playerRoutes);
-
-// app.post('/add',(req, res)=> {
-//     artist_db.add(req.body)
-//     res.send(artist_db.getall());
-// });
-
-// app.post('/remove',(req, res)=> {
-//     artist_db.remove(req.body)
-//     res.send("successfully removed!");
-// });
-
-// app.get('/getArtists',(req, res)=> {
-//     res.send(artist_db.getall());
-// });
-
-// app.post('/search',(req, res)=> {
-//     matches = artist_db.search(req.body)
-//     res.send(matches);
-// });
 
 
 
