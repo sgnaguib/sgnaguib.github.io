@@ -1,7 +1,6 @@
 let express = require('express')
 let path = require('path');
 let bodyParser = require('body-parser');
-let artist_db = require('./artists');
 
 let app = express();
 
@@ -15,24 +14,28 @@ app.get('/', (req,res) => {
 
 })
 
-app.post('/submit',(req, res)=> {
-    artist_db.add(req.body)
-    res.send(artist_db.getall());
-});
+let playerRoutes = require('./routes/dataRoutes');
 
-app.post('/remove',(req, res)=> {
-    artist_db.remove(req.body)
-    res.send("successfully removed!");
-});
+app.use(playerRoutes);
 
-app.get('/getArtists',(req, res)=> {
-    res.send(artist_db.getall());
-});
+// app.post('/add',(req, res)=> {
+//     artist_db.add(req.body)
+//     res.send(artist_db.getall());
+// });
 
-app.post('/search',(req, res)=> {
-    matches = artist_db.search(req.body)
-    res.send(matches);
-});
+// app.post('/remove',(req, res)=> {
+//     artist_db.remove(req.body)
+//     res.send("successfully removed!");
+// });
+
+// app.get('/getArtists',(req, res)=> {
+//     res.send(artist_db.getall());
+// });
+
+// app.post('/search',(req, res)=> {
+//     matches = artist_db.search(req.body)
+//     res.send(matches);
+// });
 
 
 
