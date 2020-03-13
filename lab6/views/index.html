@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+        <script src="main.js" defer></script>
+      </head>
+    <body>
+
+
+        <div id='main'>
+        <div id='directory'>
+            <br>Artist Directory</br>
+            <input id='search'></input>
+            <button id='add' onclick="toggleOpen()">Add</button>
+            <button id='add' onclick='search()'>Search</button>
+       </div>
+
+       <div class="form-popup" id="myForm">
+        <form id="theForm" name="Form" class="form-container">
+      
+          <input id="name" type="text" placeholder="Artist Name" maxlength="40" required>
+          <input id="about" type="text" placeholder="About Artist"  maxlength="40" required>
+          <input id="url" type="text" placeholder="Image url"  required>
+          <button type='button' class="btn" onclick='sendInfo()'>Add</button>
+        </form>
+      </div>
+        </div>
+        </div>
+    </body>
+</html>
