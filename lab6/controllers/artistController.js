@@ -1,12 +1,5 @@
 let mod = require('../models/artistData');
 
-exports.getAllPeople = function(req,res) {
-    let Peoples = mod.getall();
-    Peoples.then((data) => {
-        res.render('peoples', { people: data.rows, peoplesCSS: true });
-    });
-}
-
 exports.peopleAdd = async function(req,res) {
    let p_name = req.body.name;
    let p_about = req.body.about;
@@ -29,6 +22,20 @@ exports.removeArtist = async function(req,res) {
     let id = req.params.id;
     console.log(id);
     
+    await mod.remove(id);
     res.redirect(301, '/');
     
  }
+
+ exports.searchArtists = async function(req,res) {
+    let name = req.body.search;
+    console.log(name);
+    
+    matches = mod.search(name);
+    matches.then((data) => {
+        res.render('directory', { pageTitle: 'Artist App', people:data.rows});
+    });
+    
+    
+ }
+

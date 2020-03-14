@@ -8,12 +8,17 @@ function getAllPeople() {
     return db.query('Select * from artists');
 }
 
-function getPeople(id) {
-    return db.query('Select * from artists where id = ' + id);
+async function removeArtist(id){
+    await db.query('Delete from artists where id = ' + id);
+}
+
+function searchArtists(name){
+    return db.query("SELECT * FROM artists WHERE UPPER(name) LIKE UPPER('%" + name + "%');");
 }
 
 module.exports = {
     add : addPeople,
     getall : getAllPeople,
-    getpeople: getPeople 
+    remove : removeArtist,
+    search: searchArtists
 }

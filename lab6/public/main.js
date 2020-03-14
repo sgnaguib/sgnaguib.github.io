@@ -28,9 +28,9 @@ const isEqual = (obj1, obj2) => {
     }
   }
 
-  function remove(name) {
-    console.log(name);
-    
+  function search() {
+
+    input = document.getElementById("search").value;
 
   }
 

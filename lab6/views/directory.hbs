@@ -1,9 +1,12 @@
 <div id='main'>
     <div id='directory'>
         <br>Artist Directory</br>
-        <input id='search'></input>
-        <button id='add' onclick="toggleOpen()">Add</button>
-        <button id='add' onclick='search()'>Search</button>
+        
+        <form action="/search" method="POST">
+        <input id='search' name='search' type='text'></input>
+        <button id='add' type='submit'>Search</button>
+        <button id='add' type="button" onclick="toggleOpen()">Add</button>
+        </form>
     </div>
 
     <div class="form-popup" id="myForm">
@@ -25,7 +28,7 @@
                 <span class="small">{{this.about}}</span>
             </div>
             <img class="pic" src='{{this.url}}' />
-            <form action="/delete/1" method="POST">
+            <form action="/delete/{{this.id}}" method="POST">
             <button class="remove" type="submit">Delete</button>
             </form>
         </div>
