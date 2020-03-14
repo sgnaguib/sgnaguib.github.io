@@ -6,4 +6,29 @@
         <button id='add' onclick='search()'>Search</button>
     </div>
 
+    <div class="form-popup" id="myForm">
+        <form id="theForm" name="Form" class="form-container" method="POST" action="/add">
+
+            <input name="name" type="text" placeholder="Artist Name" maxlength="40">
+            <input name="about" type="text" placeholder="About Artist" maxlength="40">
+            <input name="url" type="text" placeholder="Image url">
+            <button type='submit' class="btn">Add</button>
+        </form>
+    </div>
+
 </div>
+
+{{#each people}}
+        <div class="artist">
+            <div class="text">
+                <b>{{this.name}}</b><br/>
+                <span class="small">{{this.about}}</span>
+            </div>
+            <img class="pic" src='{{this.url}}' />
+            <form action="/delete/1" method="POST">
+            <button class="remove" type="submit">Delete</button>
+            </form>
+        </div>
+{{/each}}
+
+{{>footer}}

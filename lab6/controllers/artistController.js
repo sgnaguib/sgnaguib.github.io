@@ -7,7 +7,7 @@ exports.getAllPeople = function(req,res) {
     });
 }
 
-exports.peopleAdd = function(req,res) {
+exports.peopleAdd = async function(req,res) {
    let p_name = req.body.name;
    let p_about = req.body.about;
    let p_imageURL = req.body.url;
@@ -20,7 +20,15 @@ exports.peopleAdd = function(req,res) {
       url: p_imageURL
    }
 
-   mod.add(pOject);
+   await mod.add(pOject);
    res.redirect(301, '/');
    
 }
+
+exports.removeArtist = async function(req,res) {
+    let id = req.params.id;
+    console.log(id);
+    
+    res.redirect(301, '/');
+    
+ }

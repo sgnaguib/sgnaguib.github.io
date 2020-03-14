@@ -1,4 +1,4 @@
-
+document.getElementById("myForm").style.display = "none";
 
 const isEqual = (obj1, obj2) => {
     const obj1Keys = Object.keys(obj1);
@@ -28,45 +28,12 @@ const isEqual = (obj1, obj2) => {
     }
   }
 
-
-  function createDiv(artist) {
-
-    name = artist.Name;
-    about = artist.About;
-    url = artist.URL;
-
-    var div = document.createElement("div");
-    var text = document.createElement("div");
-    var span = document.createElement("span");
-    var mainspan = document.createElement("span");
-    var linebreak = document.createElement("br");
-    var picture = document.createElement("div");
-    var remove = document.createElement("button")
-
-    picture.className = "pic";
-    picture.style.backgroundImage = "url(" + url + ")";
-    div.className = "artist";
-    text.className = "text";
-    span.className = "small";
-    remove.className = "remove";
-    remove.onclick = function () {
-      removeDiv(artist);
-    }
-
-    text.appendChild(mainspan);
-    text.appendChild(linebreak);
-    text.appendChild(span);
-
-    div.appendChild(picture);
-    div.appendChild(text);
-    div.appendChild(remove);
-
-    mainspan.appendChild(document.createTextNode(name));
-    remove.appendChild(document.createTextNode('Delete'));
-    span.appendChild(document.createTextNode("\n" + about));
-    document.getElementById("main").appendChild(div);
-    return div;
+  function remove(name) {
+    console.log(name);
+    
 
   }
+
+
 
 

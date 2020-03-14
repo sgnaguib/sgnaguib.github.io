@@ -1,6 +1,7 @@
 let express = require('express')
 let path = require('path');
 let bodyParser = require('body-parser');
+let mod = require('./models/artistData');
 
 let app = express();
 
@@ -24,8 +25,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false })) // middleware
 
 app.get('/', (req,res) => {
-    res.render('directory', { pageTitle: 'People App'});
-
+    let artists = mod.getall();
+    artists.then((data) => {
+        res.render('directory', { pageTitle: 'Artist App', people:data.rows});
+    }
+    )
+    
 })
 
 let playerRoutes = require('./routes/dataRoutes');
