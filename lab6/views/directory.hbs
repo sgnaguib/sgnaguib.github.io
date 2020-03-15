@@ -1,11 +1,13 @@
+{{>header}}
+
 <div id='main'>
     <div id='directory'>
         <br>Artist Directory</br>
         
         <form action="/search" method="POST">
         <input id='search' name='search' type='text'></input>
-        <button id='add' type='submit'>Search</button>
-        <button id='add' type="button" onclick="toggleOpen()">Add</button>
+        <button class='button' type='submit'>Search</button>
+        <button class='button' type="button" onclick="toggleOpen()">Add</button>
         </form>
     </div>
 
@@ -33,5 +35,3 @@
             </form>
         </div>
 {{/each}}
-
-{{>footer}}

@@ -16,9 +16,15 @@ function searchArtists(name){
     return db.query("SELECT * FROM artists WHERE UPPER(name) LIKE UPPER('%" + name + "%');");
 }
 
+function checkUser(username, password){
+    return db.query("SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "';");
+
+}
+
 module.exports = {
     add : addPeople,
     getall : getAllPeople,
     remove : removeArtist,
-    search: searchArtists
+    search: searchArtists,
+    authenticate : checkUser
 }

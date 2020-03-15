@@ -25,11 +25,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false })) // middleware
 
 app.get('/', (req,res) => {
-    let artists = mod.getall();
-    artists.then((data) => {
-        res.render('directory', { pageTitle: 'Artist App', people:data.rows});
-    }
-    )
+
+  res.render('login', { pageTitle: 'Artist App', loginCSS: true});
     
 })
 

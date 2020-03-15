@@ -27,7 +27,7 @@
   display: inline-block;
 }
 
-#add {
+.button {
   width: 50px;
   height: 30px;
   margin-left: 10px;
@@ -137,10 +137,20 @@
   margin-left: 280px;
 }
 
-footer {
-  background-color: #00695c;
+header {
+  background-color:orange;
   width: 100%;
-  color: white;
-  position: absolute;
-  bottom: 0;
+  padding: 0;
+  margin-top:0px;
+  height:40px;
+}
+
+#logout {
+  float:right;
+  margin-top:5px;
+  margin-right:5px;
+}
+
+body {
+  margin:0px;
 }

@@ -7,13 +7,13 @@ exports.peopleAdd = async function(req,res) {
 
    console.log(req.body);
 
-   let pOject = {
+   let pObject = {
       name: p_name,
       about: p_about,
       url: p_imageURL
    }
 
-   await mod.add(pOject);
+   await mod.add(pObject);
    res.redirect(301, '/');
    
 }
