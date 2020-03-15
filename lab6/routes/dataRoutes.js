@@ -9,5 +9,6 @@ router.post('/add', artistController.peopleAdd);
 router.post('/delete/:id', artistController.removeArtist);
 router.post('/search', artistController.searchArtists);
 router.post('/login', loginController.checkUser);
+router.get('/view', artistController.showAll)
 
 module.exports = router;

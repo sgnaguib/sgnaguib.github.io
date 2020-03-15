@@ -1,4 +1,14 @@
-let mod = require('../models/artistData');
+let mod = require('../models/dbModel');
+
+exports.showAll = function(req, res){
+   let artists = mod.getall();
+        artists.then((data) => {
+            res.render('directory', {
+                pageTitle: 'Artist App',
+                people: data.rows
+            });
+        })
+}
 
 exports.peopleAdd = async function(req,res) {
    let p_name = req.body.name;
@@ -12,18 +22,18 @@ exports.peopleAdd = async function(req,res) {
       about: p_about,
       url: p_imageURL
    }
-
-   await mod.add(pObject);
-   res.redirect(301, '/');
    
+   mod.add(pObject);
+   res.redirect(301, '/view');
 }
+
 
 exports.removeArtist = async function(req,res) {
     let id = req.params.id;
     console.log(id);
     
     await mod.remove(id);
-    res.redirect(301, '/');
+    res.redirect(301, '/view');
     
  }
 

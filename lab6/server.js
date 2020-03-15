@@ -1,7 +1,7 @@
 let express = require('express')
 let path = require('path');
 let bodyParser = require('body-parser');
-let mod = require('./models/artistData');
+let mod = require('./models/dbModel');
 
 let app = express();
 

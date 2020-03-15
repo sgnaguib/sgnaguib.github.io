@@ -1,7 +1,7 @@
 let db = require('../db/db');
 
-async function addPeople(e) {
-     await db.query("Insert into artists (name,about,url) VALUES ('" + e.name +"','"+ e.about + "','"+ e.url +"')");
+function addPeople(e) {
+     db.query("Insert into artists (name,about,url) VALUES ('" + e.name +"','"+ e.about + "','"+ e.url +"')");
 }
 
 function getAllPeople() {

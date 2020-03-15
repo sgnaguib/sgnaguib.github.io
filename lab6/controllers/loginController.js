@@ -1,13 +1,10 @@
-let mod = require('../models/artistData');
+let mod = require('../models/dbModel');
 
 exports.checkUser = async function (req, res) {
 
     let userName = req.body.userName;
     let password = req.body.password;
-    console.log(userName);
-
     result = await mod.authenticate(userName, password);
-    console.log(result);
     if (result.rows.length !== 0) {
 
         let artists = mod.getall();
