@@ -1,0 +1,9 @@
+[
+  {"id":"1","label":"chr1","color":"#996600","len":30427671},
+  {"id":"2","label":"chr2","color":"#666600","len":19698289},
+  {"id":"3","label":"chr3","color":"#99991E","len":23459830},
+  {"id":"4","label":"chr4","color":"#CC0000","len":18585056},
+  {"id":"5","label":"chr5","color":"#FF0000","len":26975502},
+  {"id":"Mt","label":"chrMt","color":"#999999","len":366924},
+  {"id":"Pt","label":"chrPt","color":"#CCCCCC","len":154478}
+]
